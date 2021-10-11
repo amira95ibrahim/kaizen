@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::middleware('token.auth')->group(function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+
 });
+
+Route::post('/login', 'AuthController@login');
+Route::post('/register', 'AuthController@register');
